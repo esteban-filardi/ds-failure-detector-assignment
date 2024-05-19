@@ -57,7 +57,7 @@ public class Cluster
         
         if (previousNodeStatus == NodeStatus.Suspected)
         {
-            UpdateNodeElapsedTimeThreshold(node, previousHeartbeatTimestamp);
+            UpdateNodeElapsedTimeThreshold(copyOfNode, previousHeartbeatTimestamp);
         }
 
         Nodes[nodeId] = copyOfNode;
