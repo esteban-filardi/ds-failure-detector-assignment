@@ -7,8 +7,8 @@ namespace DistributedSystemsFailureDetectorAssignment.Application;
 
 /// <summary>
 /// Periodically checks the content of nodes to check whether heartbeat messages have been received 
-/// before the threshold period and check for the code it has not .
-/// 
+/// before the nodes' threshold period and sets the status to unsuspected for the nodes for which the heartbeat
+/// has not been received.
 /// </summary>
 public class FailureDetectorBackgroundService : BackgroundService
 {

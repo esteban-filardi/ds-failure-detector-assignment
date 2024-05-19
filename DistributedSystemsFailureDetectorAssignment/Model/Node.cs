@@ -5,10 +5,10 @@ namespace DistributedSystemsFailureDetectorAssignment.Model;
 
 public class Node
 {
-    public string NodeId { get; internal set; } = "";
     /// <summary>
-    /// URL of the node
+    /// For the purposes of the assignment I'm using NodeId == NodeUrl
     /// </summary>
+    public string NodeId { get; internal set; } = "";    
     public string NodeUrl { get; set; } = "";
     public NodeStatus Status { get; set; } = NodeStatus.Suspected;
     /// <summary>

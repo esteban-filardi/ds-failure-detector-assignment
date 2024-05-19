@@ -3,6 +3,9 @@ using Grpc.Core;
 
 namespace DistributedSystemsFailureDetectorAssignment.gRpcServices
 {
+    /// <summary>
+    /// Exposes an gRPC endpoint to receive heartbeat messages from nodes in the cluster
+    /// </summary>
     public class HeartbeatService : Heartbeat.HeartbeatBase
     {
         private readonly ILogger<HeartbeatService> _logger;
@@ -13,7 +16,12 @@ namespace DistributedSystemsFailureDetectorAssignment.gRpcServices
             _logger = logger;
             _cluster = cluster;
         }
-
+        /// <summary>
+        /// Receives the heartbeat from other nodes
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override Task<HeartbeatReply> ReceiveHeartbeat(HeartbeatRequest request, ServerCallContext context)
         {
             Task.Run(() =>

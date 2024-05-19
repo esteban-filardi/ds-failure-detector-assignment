@@ -4,7 +4,7 @@ using Grpc.Net.Client;
 namespace DistributedSystemsFailureDetectorAssignment.Application;
 
 /// <summary>
-/// Periodically sends the heartbeat message to all clusters in the node
+/// Periodically sends the heartbeat message to all nodes in the cluster.
 /// </summary>
 public class HeartbeatBackgroundService : BackgroundService
 {

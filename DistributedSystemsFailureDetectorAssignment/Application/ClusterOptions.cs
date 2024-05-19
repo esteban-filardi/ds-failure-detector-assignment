@@ -1,5 +1,8 @@
 ﻿namespace DistributedSystemsFailureDetectorAssignment.Application;
 
+/// <summary>
+/// Class to represent cluster options
+/// </summary>
 public class ClusterOptions
 {
     public const string Cluster = "Cluster";
