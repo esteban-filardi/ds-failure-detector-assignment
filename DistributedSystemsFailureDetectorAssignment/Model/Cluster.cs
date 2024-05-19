@@ -9,6 +9,7 @@ namespace DistributedSystemsFailureDetectorAssignment.Model;
 public class Cluster
 {
     private readonly TimeSpan _defaultNodeElapsedTimeThreshold;
+    public ConcurrentDictionary<string, Node> Nodes { get; set; } = new();
 
     public Cluster(IOptions<ClusterOptions> clusterOptionsParam)
     {        
@@ -27,8 +28,6 @@ public class Cluster
             };
         }
     }
-
-    public ConcurrentDictionary<string, Node> Nodes { get; set; } = new ();
 
     public void SetNodeAsSuspected(string nodeId)
     {
