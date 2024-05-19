@@ -1,7 +1,7 @@
 using DistributedSystemsFailureDetectorAssignment.Model;
 using Grpc.Core;
 
-namespace DistributedSystemsFailureDetectorAssignment.Services
+namespace DistributedSystemsFailureDetectorAssignment.gRpcServices
 {
     public class HeartbeatService : Heartbeat.HeartbeatBase
     {

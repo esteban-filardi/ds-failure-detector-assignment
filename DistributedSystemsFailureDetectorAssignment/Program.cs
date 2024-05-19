@@ -1,6 +1,6 @@
 using DistributedSystemsFailureDetectorAssignment.Application;
 using DistributedSystemsFailureDetectorAssignment.Model;
-using DistributedSystemsFailureDetectorAssignment.Services;
+using DistributedSystemsFailureDetectorAssignment.gRpcServices;
 
 namespace DistributedSystemsFailureDetectorAssignment
 {
