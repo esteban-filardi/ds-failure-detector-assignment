@@ -63,17 +63,17 @@ public class FailureDetectorBackgroundService : BackgroundService
     {
         StringBuilder sb = new();
         sb.AppendLine("Current cluster information:");
-        string tableHeader = string.Format("|{0,-25}|{1,-25}|{2,-22}|{3,-14}|{4,-25}|", "NodeId", "NodeUrl", "LastReceivedHeartbeat", "Status", "HeartbeatThreshold (ms)");
+        string tableHeader = string.Format("|{0,-28}|{1,-28}|{2,-22}|{3,-14}|{4,-18}|", "NodeId", "NodeUrl", "LastReceivedHeartbeat", "Status", "HeartbeatThreshold");
         sb.AppendLine(tableHeader);
-        sb.AppendLine(new string('-', 117));
+        sb.AppendLine(new string('-', 116));
         foreach (var node in _cluster.Nodes.Values)
         {
-            var row = string.Format("|{0,-25}|{1,-25}|{2,-22}|{3,-14}|{4,-25}|",
+            var row = string.Format("|{0,-28}|{1,-28}|{2,-22}|{3,-14}|{4,-18}|",
                                     node.NodeId,
                                     node.NodeUrl,
                                     node.LastReceivedHeartbeatTimestamp,
                                     node.Status,
-                                    node.ElapsedTimeThreshold.TotalMilliseconds.ToString("N0"));
+                                    node.ElapsedTimeThreshold.TotalMilliseconds.ToString("N0") + " ms");
 
             sb.AppendLine(row);            
         }
