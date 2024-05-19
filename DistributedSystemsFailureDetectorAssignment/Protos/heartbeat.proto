@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "DistributedSystemsFailureDetectorAssignment";
+
+package Heartbeat;
+
+// The greeting service definition.
+service Heartbeat {
+  // Sends a greeting
+  rpc ReceiveHeartbeat (HeartbeatRequest) returns (HeartbeatReply);
+}
+
+// The request message containing the node's id'
+message HeartbeatRequest {
+  string nodeId = 1;
+}
+
+// The response message
+message HeartbeatReply {
+  string message = 1;
+}
