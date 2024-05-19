@@ -18,7 +18,7 @@ public class Cluster
         {
             var nodeUrl = nodeOptions.NodeUrl;
 
-            _defaultNodeElapsedTimeThreshold = TimeSpan.FromMilliseconds(clusterOptions.DefaultNodeElapsedTimeThresholdMilliseconds);
+            _defaultNodeElapsedTimeThreshold = TimeSpan.FromMilliseconds(clusterOptions.DefaultNodeElapsedTimeThresholdMs);
             Nodes[nodeUrl] = new Node
             {
                 NodeId = nodeUrl,
