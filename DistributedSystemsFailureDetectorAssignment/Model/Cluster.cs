@@ -15,13 +15,13 @@ public class Cluster
         var clusterOptions = clusterOptionsParam.Value;
         foreach (var nodeOptions in clusterOptions.Nodes)
         {
-            var location = nodeOptions.Location;
+            var nodeUrl = nodeOptions.NodeUrl;
 
             _defaultNodeElapsedTimeThreshold = TimeSpan.FromMilliseconds(clusterOptions.DefaultNodeElapsedTimeThresholdMilliseconds);
-            Nodes[location] = new Node
+            Nodes[nodeUrl] = new Node
             {
-                NodeId = location,
-                Location = location,
+                NodeId = nodeUrl,
+                NodeUrl = nodeUrl,
                 ElapsedTimeThreshold = _defaultNodeElapsedTimeThreshold,
                 Status = NodeStatus.Suspected
             };

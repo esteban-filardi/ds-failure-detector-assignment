@@ -54,7 +54,7 @@ public class FailureDetectorBackgroundService : BackgroundService
                 _logger.LogWarning("Heartbeat of node with ID {NodeId} has not been received before node time limit {T} ms." +
                     "{NewLine}Marking node as suspected", node.NodeId, node.ElapsedTimeThreshold.TotalMilliseconds, Environment.NewLine);
 
-                _cluster.SetNodeAsSuspected(node.Location);
+                _cluster.SetNodeAsSuspected(node.NodeUrl);
             }
         }
     }
@@ -63,12 +63,12 @@ public class FailureDetectorBackgroundService : BackgroundService
     {
         StringBuilder sb = new();
         sb.AppendLine("Current cluster information:");
-        string tableHeader = string.Format("|{0,-25}|{1,-25}|{2,-22}|{3,-14}|{4,-25}|", "NodeId", "Location", "LastReceivedHeartbeat", "Status", "HeartbeatThreshold (ms)");
+        string tableHeader = string.Format("|{0,-25}|{1,-25}|{2,-22}|{3,-14}|{4,-25}|", "NodeId", "NodeUrl", "LastReceivedHeartbeat", "Status", "HeartbeatThreshold (ms)");
         sb.AppendLine(tableHeader);
         sb.AppendLine(new string('-', 102));
         foreach (var node in _cluster.Nodes.Values)
         {
-            var row = string.Format("|{0,-25}|{1,-25}|{2,-22}|{3,-14}|{4,-25}|", node.NodeId, node.Location, node.LastReceivedHeartbeatTimestamp, node.Status, (int) node.ElapsedTimeThreshold.TotalMilliseconds);
+            var row = string.Format("|{0,-25}|{1,-25}|{2,-22}|{3,-14}|{4,-25}|", node.NodeId, node.NodeUrl, node.LastReceivedHeartbeatTimestamp, node.Status, (int) node.ElapsedTimeThreshold.TotalMilliseconds);
 
             sb.AppendLine(row);            
         }

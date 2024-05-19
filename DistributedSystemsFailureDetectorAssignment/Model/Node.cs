@@ -9,7 +9,7 @@ public class Node
     /// <summary>
     /// URL of the node
     /// </summary>
-    public string Location { get; set; } = "";
+    public string NodeUrl { get; set; } = "";
     public NodeStatus Status { get; set; } = NodeStatus.Suspected;
     /// <summary>
     /// Timestamp indicating when the node was first instantiated
@@ -30,7 +30,7 @@ public class Node
     public Node(Node node)
     {
         NodeId = node.NodeId;
-        Location = node.Location;
+        NodeUrl = node.NodeUrl;
         Status = node.Status;
         InitiatedTimestamp = node.InitiatedTimestamp;
         LastReceivedHeartbeatTimestamp = node.LastReceivedHeartbeatTimestamp;

@@ -12,17 +12,22 @@ public class HeartbeatBackgroundService : BackgroundService
     private readonly TimeSpan HeartbeatPropagationInterval;
     private readonly ILogger<FailureDetectorBackgroundService> _logger;
     private readonly Cluster _cluster;
-    private readonly string _currentNodeOwnLocation;
+    private readonly string _currentNodeOwnUrl;
 
     public HeartbeatBackgroundService(ILogger<FailureDetectorBackgroundService> logger, 
         IConfiguration appConfig,
         Cluster cluster)
-   {
+    {
         _logger = logger;
         _cluster = cluster;
-        _currentNodeOwnLocation = appConfig.GetValue<string>("urls") ?? appConfig.GetValue<string>("ASPNETCORE_URLS") ?? throw new Exception("Cannot determine current node's own location");
+        _currentNodeOwnUrl = RetrieveCurrentNodeUrlFromConfig(appConfig);
         var heartbeatPropagationIntervalMs = appConfig.GetValue<int>("HeartbeatPropagationIntervalMs");
         HeartbeatPropagationInterval = TimeSpan.FromMilliseconds(heartbeatPropagationIntervalMs);
+    }
+
+    private static string RetrieveCurrentNodeUrlFromConfig(IConfiguration appConfig)
+    {
+        return appConfig.GetValue<string>("urls") ?? appConfig.GetValue<string>("ASPNETCORE_URLS") ?? throw new Exception("Cannot determine current node's own URL");
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -66,10 +71,10 @@ public class HeartbeatBackgroundService : BackgroundService
 
     private async Task SendHeartbeatToNode(Node node, CancellationToken stoppingToken)
     {
-        using var channel = GrpcChannel.ForAddress(node.Location);
+        using var channel = GrpcChannel.ForAddress(node.NodeUrl);
         var client = new Heartbeat.HeartbeatClient(channel);
         // For the purposes of this assignment, I'm using this node own URL as its NodeId
-        await client.ReceiveHeartbeatAsync(new HeartbeatRequest { NodeId = _currentNodeOwnLocation }, cancellationToken: stoppingToken);
+        await client.ReceiveHeartbeatAsync(new HeartbeatRequest { NodeId = _currentNodeOwnUrl }, cancellationToken: stoppingToken);
     }    
 }
 

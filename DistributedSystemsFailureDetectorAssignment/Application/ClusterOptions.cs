@@ -10,5 +10,5 @@ public class ClusterOptions
 
 public class NodeOptions
 {
-    public string Location { get; set; } = string.Empty;
+    public string NodeUrl { get; set; } = string.Empty;
 }
