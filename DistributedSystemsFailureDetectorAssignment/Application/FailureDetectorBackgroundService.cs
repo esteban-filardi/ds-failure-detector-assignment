@@ -65,15 +65,19 @@ public class FailureDetectorBackgroundService : BackgroundService
         sb.AppendLine("Current cluster information:");
         string tableHeader = string.Format("|{0,-25}|{1,-25}|{2,-22}|{3,-14}|{4,-25}|", "NodeId", "NodeUrl", "LastReceivedHeartbeat", "Status", "HeartbeatThreshold (ms)");
         sb.AppendLine(tableHeader);
-        sb.AppendLine(new string('-', 102));
+        sb.AppendLine(new string('-', 117));
         foreach (var node in _cluster.Nodes.Values)
         {
-            var row = string.Format("|{0,-25}|{1,-25}|{2,-22}|{3,-14}|{4,-25}|", node.NodeId, node.NodeUrl, node.LastReceivedHeartbeatTimestamp, node.Status, (int) node.ElapsedTimeThreshold.TotalMilliseconds);
+            var row = string.Format("|{0,-25}|{1,-25}|{2,-22}|{3,-14}|{4,-25}|",
+                                    node.NodeId,
+                                    node.NodeUrl,
+                                    node.LastReceivedHeartbeatTimestamp,
+                                    node.Status,
+                                    node.ElapsedTimeThreshold.TotalMilliseconds.ToString("N0"));
 
             sb.AppendLine(row);            
         }
 
         Console.WriteLine(sb);
     }
-
 }
